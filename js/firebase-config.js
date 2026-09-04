@@ -5,12 +5,12 @@ window.BOLAO_CONFIG = {
   entryFee: 100,
   adminEmails: ['guilhermerasi@gmail.com'],
   firebase: {
-    apiKey: 'VALOR_FORNECIDO_PELO_FIREBASE',
-    authDomain: 'VALOR_FORNECIDO_PELO_FIREBASE',
-    projectId: 'VALOR_FORNECIDO_PELO_FIREBASE',
-    storageBucket: 'VALOR_FORNECIDO_PELO_FIREBASE',
-    messagingSenderId: 'VALOR_FORNECIDO_PELO_FIREBASE',
-    appId: 'VALOR_FORNECIDO_PELO_FIREBASE'
+    apiKey: "AIzaSyAjH8pM4px1-YG91wTWD74AeIfJd_VmioQ",
+  authDomain: "bolao-nfl-2026.firebaseapp.com",
+  projectId: "bolao-nfl-2026",
+  storageBucket: "bolao-nfl-2026.firebasestorage.app",
+  messagingSenderId: "16639131042",
+  appId: "1:16639131042:web:786ced81047b233e96c6fb"
   }
 };
 
