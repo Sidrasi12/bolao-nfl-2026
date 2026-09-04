@@ -1,42 +1,19 @@
-Bolao.Regulation = {
-  render() {
-    Bolao.App.content(`
-      <h1>Regulamento</h1>
-      <div class="card regulation-text">
-        <h2>Inscrição e premiação</h2>
-
-        <p><strong>Art. 2º</strong> O valor da inscrição é de R$ 100,00 por participante.</p>
-        <p><strong>§ 1º</strong> O participante que, ao final do bolão, tiver somado o menor número de pontos pagará multa adicional de R$ 10,00.</p>
-
-        <p><strong>Art. 3º</strong> O valor integral de cada inscrição terá a seguinte destinação:</p>
-        <ul>
-          <li>R$ 50,00 para a premiação final do bolão;</li>
-          <li>R$ 10,00 para a premiação do maior pontuador acumulado nos jogos dos playoffs;</li>
-          <li>R$ 20,00 para a premiação do maior pontuador acumulado nos jogos da temporada regular;</li>
-          <li>R$ 20,00 para a premiação dos maiores pontuadores de cada uma das 21 rodadas premiadas.</li>
-        </ul>
-
-        <p><strong>§ 1º</strong> As 21 rodadas premiadas são formadas pelas 18 rodadas da temporada regular e pelas três primeiras fases dos playoffs: Wild Card, Divisional e Finais de Conferência.</p>
-        <p><strong>§ 2º</strong> O fundo de R$ 20,00 por participante destinado às rodadas será dividido igualmente entre as 21 rodadas premiadas.</p>
-        <p><strong>§ 3º</strong> O valor do prêmio de cada rodada será calculado pela fórmula: número de participantes ativos multiplicado por R$ 20,00, dividido por 21.</p>
-        <p><strong>§ 4º</strong> O Super Bowl contará para a pontuação geral e para a apuração do maior pontuador acumulado dos playoffs, mas não terá prêmio específico de maior pontuador da rodada.</p>
-        <p><strong>§ 5º</strong> O Pro Bowl não integra o bolão e não gera pontuação ou premiação.</p>
-
-        <p><strong>Art. 4º</strong> O fundo da premiação final será constituído por R$ 50,00 de cada inscrição.</p>
-        <p><strong>§ 1º</strong> Com até dez participantes, 100% da premiação final será destinada ao primeiro colocado.</p>
-        <p><strong>§ 2º</strong> Com 11 a 20 participantes, 90% da premiação final será destinada ao primeiro colocado e 10% ao segundo colocado.</p>
-        <p><strong>§ 3º</strong> Com mais de 20 participantes, 80% da premiação final será destinada ao primeiro colocado, 15% ao segundo colocado e 5% ao terceiro colocado.</p>
-        <p><strong>§ 4º</strong> Considera-se vencedor do bolão o participante que, ao final, tiver somado o maior número de pontos.</p>
-
-        <h2>Pontuação dos jogos</h2>
-        <ul>
-          <li>Temporada regular: 3 pontos pelo vencedor e 1 ponto pela dificuldade.</li>
-          <li>Playoffs: 6 pontos pelo vencedor e 2 pontos pela dificuldade.</li>
-          <li>A dificuldade somente pontua quando o vencedor também estiver correto.</li>
-          <li>A ausência de palpite vale zero ponto.</li>
-          <li>O fator de correção é aplicado conforme o percentual de participantes ativos que acertar o palpite.</li>
-        </ul>
-      </div>
-    `);
-  }
-};
+Bolao.Regulation={render(){Bolao.App.content(`
+<h1>Regulamento</h1><div class="card regulation-text">
+<h2>Inscrição e premiação</h2>
+<p><strong>Art. 2º</strong> O valor da inscrição é de R$ 100,00.</p>
+<p><strong>§ 1º</strong> O valor da inscrição do participante que, ao final do bolão, tiver somado o menor número de pontos será acrescido de multa de R$ 10,00.</p>
+<p><strong>Art. 3º</strong> Nas 17 rodadas da temporada regular e nas três primeiras rodadas dos playoffs, Wild Card, Divisional e Finais de Conferência, haverá premiação para o maior pontuador da rodada.</p>
+<p><strong>§ 1º</strong> O valor da premiação por rodada será de R$ 1,00 por participante, totalizando R$ 20,00 durante todo o bolão para essa modalidade de premiação.</p>
+<p><strong>§ 2º</strong> A parcela de R$ 20,00 de cada inscrição será destinada à premiação do maior pontuador dos jogos da temporada regular.</p>
+<p><strong>§ 3º</strong> A parcela de R$ 10,00 de cada inscrição será destinada à premiação do maior pontuador nos jogos dos playoffs.</p>
+<p><strong>Art. 4º</strong> Os R$ 50,00 restantes de cada inscrição serão destinados à premiação final do bolão.</p>
+<p><strong>§ 1º</strong> Caso o bolão tenha no máximo dez participantes, toda a premiação final será destinada ao vencedor.</p>
+<p><strong>§ 2º</strong> Caso o bolão tenha entre 11 e 20 participantes, a premiação final será de 10% para o segundo colocado e os 90% restantes para o vencedor.</p>
+<p><strong>§ 3º</strong> Caso o bolão tenha mais de 20 participantes, a premiação final será de 5% para o terceiro colocado, 15% para o segundo colocado e os 80% restantes para o vencedor.</p>
+<p><strong>§ 4º</strong> Considera-se vencedor do bolão o participante que, ao final do bolão, tiver somado o maior número de pontos.</p>
+<div class="notice"><strong>Nota de consistência financeira:</strong> os valores expressamente destinados nos arts. 3º e 4º somam R$ 80,00 por inscrição: R$ 20,00 para a temporada regular, R$ 10,00 para os playoffs e R$ 50,00 para a premiação final. O painel financeiro mantém os R$ 20,00 restantes por inscrição como saldo não destinado, até eventual complementação do regulamento.</div>
+<h2>Palpites semanais</h2><p>O participante escolhe o vencedor e a dificuldade da vitória. VD corresponde a diferença de até 10 pontos e VF a diferença superior a 10 pontos. A ausência de palpite vale zero ponto.</p>
+<h2>Pontuação dos jogos</h2><ul><li>Temporada regular: vencedor 3 pontos e dificuldade 1 ponto.</li><li>Playoffs: vencedor 6 pontos e dificuldade 2 pontos.</li><li>A dificuldade somente pontua quando o vencedor também estiver correto.</li><li>O fator de correção é aplicado conforme o percentual de participantes ativos que acertou o palpite.</li></ul>
+<h2>Playoffs</h2><p>Para este bolão, as fases consideradas são Wild Card, Divisional, Finais de Conferência e Super Bowl. O Pro Bowl não integra os playoffs nem gera pontuação ou premiação.</p>
+</div>`)}};
