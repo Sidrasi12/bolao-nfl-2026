@@ -1,0 +1,1 @@
+window.BOLAO_CONFIG={season:2026,preseasonDeadline:'2026-09-08T19:00:00-03:00',lockMinutes:60,entryFee:100,adminEmails:['SEU_EMAIL@EXEMPLO.COM'],firebase:{apiKey:'COLE_AQUI',authDomain:'SEU_PROJETO.firebaseapp.com',projectId:'SEU_PROJETO',storageBucket:'SEU_PROJETO.appspot.com',messagingSenderId:'COLE_AQUI',appId:'COLE_AQUI'}};window.Bolao=window.Bolao||{};
