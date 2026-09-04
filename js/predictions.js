@@ -1,7 +1,11 @@
 Bolao.Predictions={
-  gameDoc(week,gameId){
-    return Bolao.db.collection('gamePredictions').doc(`${BOLAO_CONFIG.season}_${week}_${gameId}_${Bolao.Auth.user.uid}`)
-  },
+  gameDoc(week, gameId) {
+  return Bolao.db
+    .collection('userPredictions')
+    .doc(Bolao.Auth.user.uid)
+    .collection('games')
+    .doc(`${BOLAO_CONFIG.season}_${week}_${gameId}`);
+},
   async loadWeekly(week,games){
     const entries=await Promise.all(games.map(async g=>{
       const d=await this.gameDoc(week,g.id).get();
@@ -43,7 +47,14 @@ Bolao.Predictions={
     })
   },
   async preseason(){
-    const id=`${BOLAO_CONFIG.season}_${Bolao.Auth.user.uid}`,ref=Bolao.db.collection('preseasonPredictions').doc(id),snap=await ref.get(),p=snap.exists?snap.data().picks||{}:{};
+    const ref = Bolao.db
+  .collection('userPredictions')
+  .doc(Bolao.Auth.user.uid)
+  .collection('preseason')
+  .doc(String(BOLAO_CONFIG.season));
+
+const snap = await ref.get();
+const p = snap.exists ? snap.data().picks || {} : {};
     const divs=[['AFC','Leste'],['AFC','Oeste'],['AFC','Sul'],['AFC','Norte'],['NFC','Leste'],['NFC','Oeste'],['NFC','Sul'],['NFC','Norte']];
     const field=(id,label,filter={})=>`<label>${label}<select id="${id}">${Bolao.teamOptions(filter)}</select></label>`;
     Bolao.App.content(`<div class="section-title"><h1>Pré-temporada</h1><span class="badge">Prazo: 8 de setembro</span></div><div class="notice">Os palpites ficam privados até o prazo final da pré-temporada.</div><form id="pre-form" class="card" style="margin-top:14px"><div class="form-grid">${field('champion','Campeão do Super Bowl')}${field('runner','Vice-campeão')}${divs.map(([c,d])=>field(`div_${c}_${d}`,`${c} ${d}`,{conference:c,division:d})).join('')}${field('worst','Pior campanha')}<label>MVP<input id="mvp" placeholder="Nome do jogador"></label></div><h3>Wild Cards</h3><div class="form-grid">${[1,2,3].map(i=>field('wcAFC'+i,'Wildcard AFC '+i,{conference:'AFC'})).join('')}${[1,2,3].map(i=>field('wcNFC'+i,'Wildcard NFC '+i,{conference:'NFC'})).join('')}</div><button>Salvar palpites</button></form>`);
