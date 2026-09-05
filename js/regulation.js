@@ -55,7 +55,7 @@ Bolao.Regulation = {
           <li>equipe de pior campanha;</li>
           <li>MVP da temporada.</li>
         </ul>
-        <p>7.2. Os palpites deverão ser registrados até o prazo informado no site e não poderão ser alterados depois do encerramento.</p>
+        <p>7.2. Os palpites deverão ser registrados até as 23h59 do dia 8 de setembro de 2026, no horário de Brasília, e não poderão ser alterados depois do encerramento.</p>
         <p>7.3. A ausência de palpite em qualquer item valerá zero ponto.</p>
 
         <h2>8. Pontuação dos palpites de pré-temporada</h2>
