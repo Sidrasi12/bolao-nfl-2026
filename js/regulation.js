@@ -75,7 +75,7 @@ Bolao.Regulation = {
             </tbody>
           </table>
         </div>
-        <p>8.1. Não haverá pontuação adicional de 5 pontos por equipe presente nos playoffs.</p>
+       
 
         <h2>9. Palpites dos jogos</h2>
         <p>9.1. Para cada partida, o participante deverá indicar a equipe vencedora e a dificuldade da vitória.</p>
