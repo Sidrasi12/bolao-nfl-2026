@@ -31,7 +31,6 @@ Bolao.Regulation = {
         <p>4.3. O prêmio de cada rodada será calculado pela fórmula: número de participantes ativos multiplicado por R$ 20,00, dividido por 21.</p>
         <p>4.4. Havendo empate na maior pontuação da rodada, o prêmio será dividido igualmente entre todos os participantes empatados.</p>
         <p>4.5. O Super Bowl pontuará nos playoffs e na classificação geral, mas não terá prêmio específico de rodada.</p>
-        <p>4.6. O Pro Bowl não integrará o bolão e não gerará pontuação ou premiação.</p>
 
         <h2>5. Premiações acumuladas</h2>
         <p>5.1. O fundo do maior pontuador da temporada regular será formado por R$ 20,00 de cada inscrição e considerará exclusivamente os pontos das 18 rodadas regulares.</p>
