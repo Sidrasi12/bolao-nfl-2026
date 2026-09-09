@@ -35,7 +35,7 @@ Bolao.PreseasonResults = {
       <div id="preseason-results" class="card">
         ${released
           ? 'Carregando palpites...'
-          : '<div class="notice">Os palpites de todos os participantes serão liberados após o encerramento do prazo, em 9 de setembro de 2026, às 00h00, horário de Brasília.</div>'}
+          : '<div class="notice">Os palpites de todos os participantes serão liberados após o encerramento do prazo, em 12 de setembro de 2026, às 00h00, horário de Brasília.</div>'}
       </div>
     `);
 
