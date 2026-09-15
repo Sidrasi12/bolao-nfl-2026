@@ -10,36 +10,34 @@ Bolao.TeamRecords = {
       const teams = card.querySelectorAll('.team');
       if (teams.length < 2) return;
 
-      this.formatTeam(teams[0], game.away.name, game.away.record);
-      this.formatTeam(teams[1], game.home.name, game.home.record);
+      this.formatTeam(teams[0], game.away.name, game.away.record, false);
+      this.formatTeam(teams[1], game.home.name, game.home.record, true);
     });
   },
 
-  formatTeam(teamElement, teamName, record) {
+  formatTeam(teamElement, teamName, record, isHome) {
     const image = teamElement.querySelector('img');
-    let nameElement = teamElement.querySelector('.team-name');
-    let recordElement = teamElement.querySelector('.team-record');
+    const info = document.createElement('span');
+    const name = document.createElement('span');
+    const recordLine = document.createElement('small');
 
-    if (!nameElement) {
-      nameElement = document.createElement('span');
-      nameElement.className = 'team-name';
-    }
+    info.className = 'team-info';
+    name.className = 'team-name';
+    recordLine.className = 'team-record';
 
-    if (!recordElement) {
-      recordElement = document.createElement('small');
-      recordElement.className = 'team-record';
-    }
-
-    nameElement.textContent = teamName;
-    recordElement.textContent = `(${record || 'Recorde indisponível'})`;
+    name.textContent = teamName;
+    recordLine.textContent = `(${record || 'Recorde indisponível'})`;
+    info.append(name, recordLine);
 
     teamElement.replaceChildren();
-    if (teamElement.matches('.team:last-child')) {
-      teamElement.append(nameElement, recordElement);
+    teamElement.classList.toggle('team-home', isHome);
+
+    if (isHome) {
+      teamElement.append(info);
       if (image) teamElement.append(image);
     } else {
       if (image) teamElement.append(image);
-      teamElement.append(nameElement, recordElement);
+      teamElement.append(info);
     }
   }
 };
