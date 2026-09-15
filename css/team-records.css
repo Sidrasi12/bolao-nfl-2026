@@ -1,15 +1,14 @@
-/* Recorde abaixo do nome da equipe, no formato (V-D-E) */
+/* Nome e recorde em duas linhas */
 #games .team {
-  display: grid !important;
-  grid-template-columns: 40px minmax(0, 1fr) !important;
-  grid-template-rows: auto auto !important;
+  display: flex !important;
+  flex-flow: row nowrap !important;
   align-items: center !important;
-  column-gap: 8px !important;
+  gap: 8px !important;
 }
 
 #games .team > img {
-  grid-column: 1 !important;
-  grid-row: 1 / 3 !important;
+  display: block !important;
+  flex: 0 0 34px !important;
   width: 34px !important;
   height: 34px !important;
   min-width: 34px !important;
@@ -17,43 +16,49 @@
   min-height: 34px !important;
   max-height: 34px !important;
   margin: 0 !important;
+  padding: 0 !important;
   object-fit: contain !important;
 }
 
-#games .team .team-name {
-  grid-column: 2 !important;
-  grid-row: 1 !important;
+#games .team-info {
+  display: flex !important;
+  flex: 0 1 auto !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
   min-width: 0 !important;
+  gap: 3px !important;
+  line-height: 1.15 !important;
+}
+
+#games .team-name {
+  display: block !important;
   color: var(--text) !important;
   font-size: 15px !important;
   font-weight: 700 !important;
-  line-height: 1.2 !important;
+  white-space: normal !important;
 }
 
-#games .team .team-record {
-  grid-column: 2 !important;
-  grid-row: 2 !important;
+#games .team-record {
   display: block !important;
-  margin: 3px 0 0 !important;
+  width: 100% !important;
+  margin: 0 !important;
   color: var(--muted) !important;
   font-size: 12px !important;
   font-weight: 600 !important;
   line-height: 1.15 !important;
+  white-space: nowrap !important;
 }
 
+#games .team.team-home,
 #games .team:last-child {
-  grid-template-columns: minmax(0, 1fr) 40px !important;
+  justify-content: flex-end !important;
   text-align: right !important;
 }
 
-#games .team:last-child > img {
-  grid-column: 2 !important;
-}
-
-#games .team:last-child .team-name,
-#games .team:last-child .team-record {
-  grid-column: 1 !important;
-  text-align: right !important;
+#games .team.team-home .team-info,
+#games .team:last-child .team-info {
+  align-items: flex-end !important;
 }
 
 .dashboard-game .team img {
@@ -65,18 +70,14 @@
 
 @media (max-width: 850px) {
   #games .team,
+  #games .team.team-home,
   #games .team:last-child {
-    grid-template-columns: 40px minmax(0, 1fr) !important;
+    justify-content: flex-start !important;
     text-align: left !important;
   }
 
-  #games .team:last-child > img {
-    grid-column: 1 !important;
-  }
-
-  #games .team:last-child .team-name,
-  #games .team:last-child .team-record {
-    grid-column: 2 !important;
-    text-align: left !important;
+  #games .team.team-home .team-info,
+  #games .team:last-child .team-info {
+    align-items: flex-start !important;
   }
 }
