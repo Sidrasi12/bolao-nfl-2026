@@ -10,21 +10,37 @@ Bolao.TeamRecords = {
       const teams = card.querySelectorAll('.team');
       if (teams.length < 2) return;
 
-      this.addRecord(teams[0], game.away.record);
-      this.addRecord(teams[1], game.home.record);
+      this.formatTeam(teams[0], game.away.name, game.away.record);
+      this.formatTeam(teams[1], game.home.name, game.home.record);
     });
   },
 
-  addRecord(teamElement, record) {
+  formatTeam(teamElement, teamName, record) {
+    const image = teamElement.querySelector('img');
+    let nameElement = teamElement.querySelector('.team-name');
     let recordElement = teamElement.querySelector('.team-record');
+
+    if (!nameElement) {
+      nameElement = document.createElement('span');
+      nameElement.className = 'team-name';
+    }
 
     if (!recordElement) {
       recordElement = document.createElement('small');
       recordElement.className = 'team-record';
-      teamElement.appendChild(recordElement);
     }
 
-    recordElement.textContent = record || 'Recorde indisponível';
+    nameElement.textContent = teamName;
+    recordElement.textContent = `(${record || 'Recorde indisponível'})`;
+
+    teamElement.replaceChildren();
+    if (teamElement.matches('.team:last-child')) {
+      teamElement.append(nameElement, recordElement);
+      if (image) teamElement.append(image);
+    } else {
+      if (image) teamElement.append(image);
+      teamElement.append(nameElement, recordElement);
+    }
   }
 };
 
