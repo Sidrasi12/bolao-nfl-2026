@@ -1,0 +1,73 @@
+#games .team.team-record-layout {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+#games .team.team-record-layout > img {
+  display: block !important;
+  flex: 0 0 34px !important;
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  max-width: 34px !important;
+  min-height: 34px !important;
+  max-height: 34px !important;
+  margin: 0 !important;
+  object-fit: contain !important;
+}
+
+#games .team-record-info-v2 {
+  display: flex !important;
+  flex-direction: column !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 3px !important;
+  min-width: 0 !important;
+}
+
+#games .team-record-name-v2,
+#games .team-record-value-v2 {
+  display: block !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  line-height: 1.15 !important;
+}
+
+#games .team-record-name-v2 {
+  color: var(--text) !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+}
+
+#games .team-record-value-v2 {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  white-space: nowrap !important;
+}
+
+#games .team.team-record-home {
+  justify-content: flex-end !important;
+  text-align: right !important;
+}
+
+#games .team.team-record-home .team-record-info-v2 {
+  align-items: flex-end !important;
+}
+
+@media (max-width: 850px) {
+  #games .team.team-record-layout,
+  #games .team.team-record-home {
+    justify-content: flex-start !important;
+    text-align: left !important;
+  }
+
+  #games .team.team-record-home .team-record-info-v2 {
+    align-items: flex-start !important;
+  }
+}
