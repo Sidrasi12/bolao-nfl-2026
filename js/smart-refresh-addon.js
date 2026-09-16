@@ -32,9 +32,13 @@ Bolao.SmartRefresh = {
     if (!status) {
       status = document.createElement('small');
       status.id = 'smart-refresh-status';
-      status.className = 'muted';
-      title.insertAdjacentElement('afterend', status);
+      status.className = 'muted smart-refresh-status';
     }
+
+    if (status.parentElement !== title) {
+      title.appendChild(status);
+    }
+
     status.textContent = this.label(delay);
   },
 
