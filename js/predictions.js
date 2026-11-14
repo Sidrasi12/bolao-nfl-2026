@@ -7,6 +7,17 @@ Bolao.Predictions={
   formatDate(date){return date.toLocaleString('pt-BR',{dateStyle:'short',timeStyle:'short'})},
   lockLabel(){return BOLAO_CONFIG.lockMinutes===60?'1 hora antes da partida':`${BOLAO_CONFIG.lockMinutes} minutos antes da partida`},
   percent(v){return Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%'},
+  
+  // Função auxiliar para traduzir o número da semana no nome amigável dos Playoffs
+  getWeekLabel(i) {
+    if (i <= 18) return `Semana ${i}`;
+    if (i === 19) return `Semana 19 - Wild Card`;
+    if (i === 20) return `Semana 20 - Divisional`;
+    if (i === 21) return `Semana 21 - Conferências`;
+    if (i === 22) return `Semana 22 - Super Bowl`;
+    return `Semana ${i}`;
+  },
+
   summaryHtml(game,summary,locked){
     if(!locked)return`<div class="notice" style="margin-top:14px">Distribuição dos palpites disponível após o encerramento.</div>`;
     if(!summary)return`<div class="notice" style="margin-top:14px">Distribuição aguardando atualização da Administração.</div>`;
@@ -14,7 +25,10 @@ Bolao.Predictions={
   },
   async weekly(){
     const week=+(localStorage.getItem('bolao_week')||1);
-    Bolao.App.content(`<div class="section-title"><h1>Palpites semanais</h1><select id="week" style="width:150px">${Array.from({length:18},(_,i)=>`<option ${i+1===week?'selected':''}>${i+1}</option>`).join('')}</select></div><div class="notice">Seus palpites permanecem privados até o encerramento de cada jogo.</div><div id="games" class="card" style="margin-top:14px">Carregando jogos...</div>`);
+    
+    // Alterado o length de 18 para 22 e aplicado o getWeekLabel para nomear as fases corretamente
+    Bolao.App.content(`<div class="section-title"><h1>Palpites semanais</h1><select id="week" style="width:220px">${Array.from({length:22},(_,i)=>`<option value="${i+1}" ${i+1===week?'selected':''}>${this.getWeekLabel(i+1)}</option>`).join('')}</select></div><div class="notice">Seus palpites permanecem privados até o encerramento de cada jogo.</div><div id="games" class="card" style="margin-top:14px">Carregando jogos...</div>`);
+    
     document.querySelector('#week').onchange=e=>{localStorage.setItem('bolao_week',e.target.value);this.weekly()};
     try{this.games=await Bolao.ESPN.games(week);[this.picks,this.summaries]=await Promise.all([this.loadWeekly(week,this.games),this.loadSummaries(week,this.games)]);this.renderGames(week)}catch(e){document.querySelector('#games').innerHTML=`<div class="notice">Não foi possível carregar: ${e.message}</div>`}
   },
@@ -31,5 +45,4 @@ Bolao.Predictions={
     const divs=[['AFC','Leste'],['AFC','Oeste'],['AFC','Sul'],['AFC','Norte'],['NFC','Leste'],['NFC','Oeste'],['NFC','Sul'],['NFC','Norte']],field=(id,label,filter={})=>`<label>${label}<select id="${id}">${Bolao.teamOptions(filter)}</select></label>`;
     Bolao.App.content(`<div class="section-title"><h1>Pré-temporada</h1><span class="badge">Prazo: 11 de setembro, às 23h59</span></div><div class="notice">Os palpites ficam privados até o prazo final da pré-temporada.</div><form id="pre-form" class="card" style="margin-top:14px"><div class="form-grid">${field('champion','Campeão do Super Bowl')}${field('runner','Vice-campeão')}${divs.map(([c,d])=>field(`div_${c}_${d}`,`${c} ${d}`,{conference:c,division:d})).join('')}${field('worst','Pior campanha')}<label>MVP<input id="mvp" placeholder="Nome do jogador"></label></div><h3>Wild Cards</h3><div class="form-grid">${[1,2,3].map(i=>field('wcAFC'+i,'Wildcard AFC '+i,{conference:'AFC'})).join('')}${[1,2,3].map(i=>field('wcNFC'+i,'Wildcard NFC '+i,{conference:'NFC'})).join('')}</div><button>Salvar palpites</button></form>`);
     Object.entries(p).forEach(([k,v])=>{const e=document.getElementById(k);if(e)e.value=v});const deadline=firebase.firestore.Timestamp.fromDate(new Date(BOLAO_CONFIG.preseasonDeadline));if(Date.now()>=deadline.toMillis())document.querySelector('#pre-form').classList.add('locked');document.querySelector('#pre-form').onsubmit=async e=>{e.preventDefault();const picks={};e.target.querySelectorAll('select,input').forEach(x=>picks[x.id]=x.value);try{await ref.set({userId:Bolao.Auth.user.uid,userName:Bolao.Auth.user.name,season:BOLAO_CONFIG.season,deadline,picks,updatedAt:firebase.firestore.FieldValue.serverTimestamp()});Bolao.App.toast('Pré-temporada salva com segurança')}catch(x){Bolao.App.toast(x.code==='permission-denied'?'Prazo encerrado ou operação não permitida':('Erro ao salvar: '+x.message))}}
-  }
 };
