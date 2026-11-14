@@ -17,17 +17,14 @@ Bolao.ESPN = {
     return this.normalizeRecord(total?.summary);
   },
 
-  async games(week = 1, type = null) {
-    // Garante que a semana é tratada como número inteiro
-    const weekNum = Number.parseInt(week, 10) || 1;
-    
-    let seasonType = type || 2; // Padrão é 2 (Temporada Regular)
-    let espnWeek = weekNum;
+  async games(week = 1, type) {
+    let seasonType = type !== undefined ? type : 2;
+    let espnWeek = week;
 
-    // Se não foi passado um tipo manual e a semana for de playoffs (19 a 22)
-    if (!type && weekNum > 18) {
-      seasonType = 3; // 3 = Pós-temporada / Playoffs
-      espnWeek = weekNum - 18; // 19 -> 1 (Wild Card), 20 -> 2 (Divisional), etc.
+    // Se type não foi passado e a semana for de playoffs (19 a 22)
+    if (type === undefined && week > 18) {
+      seasonType = 3; // Postseason
+      espnWeek = week - 18; // 19 -> 1 (Wild Card), 20 -> 2 (Divisional), etc.
     }
 
     const url = `https://site.api.espn.com/apis/site/v2/sports/football/nfl/scoreboard?limit=100&dates=${BOLAO_CONFIG.season}&seasontype=${seasonType}&week=${espnWeek}`;
