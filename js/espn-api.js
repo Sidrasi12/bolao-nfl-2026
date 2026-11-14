@@ -18,12 +18,12 @@ Bolao.ESPN = {
   },
 
   async games(week = 1, type) {
-    let seasonType = type || 2; // Padrão é 2 (Temporada Regular)
+    let seasonType = type || 2; 
     let espnWeek = week;
 
-    // Se a semana informada for maior que 18 (Playoffs: 19 a 22), 
-    // ajustamos automaticamente para o tipo 3 (Postseason) e recalculamos a semana da ESPN (1 a 4)
-    if (week > 18 && !type) {
+    // Se não foi passado um 'type' explícito e a semana for maior que 18 (Playoffs: 19 a 22),
+    // convertemos automaticamente para o seasontype 3 (Postseason) e recalculamos a semana (1 a 4).
+    if (!type && week > 18) {
       seasonType = 3;
       espnWeek = week - 18; // 19 -> 1 (Wild Card), 20 -> 2 (Divisional), etc.
     }
