@@ -11,10 +11,10 @@ Bolao.Predictions={
   // Função auxiliar para traduzir o número da semana no nome amigável dos Playoffs
   getWeekLabel(i) {
     if (i <= 18) return `Semana ${i}`;
-    if (i === 19) return `Semana 19 - Wild Card`;
-    if (i === 20) return `Semana 20 - Divisional`;
-    if (i === 21) return `Semana 21 - Conferências`;
-    if (i === 22) return `Semana 22 - Super Bowl`;
+    if (i === 19) return `Wild Card`;
+    if (i === 20) return `Divisional`;
+    if (i === 21) return `Conferências`;
+    if (i === 22) return `Super Bowl`;
     return `Semana ${i}`;
   },
 
