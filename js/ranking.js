@@ -5,6 +5,7 @@ Bolao.Ranking={
         <h1>Ranking e premiação</h1>
         <select id="rank-mode" style="width:250px">
           <option value="general">Classificação geral</option>
+          <option value="preseason">Pré-temporada</option>
           <option value="accumulated_regular">Temporada regular (Acumulado)</option>
           <option value="accumulated_playoffs">Playoffs (Acumulado)</option>
           <optgroup label="Rodadas - Temporada Regular">
@@ -290,6 +291,11 @@ Bolao.Ranking={
             <tr><td>21 Rodadas (Premiação por rodada)</td><td>${Bolao.Finance.money(f.roundPool)}</td></tr>
           </table>
         </div>
+      `;
+      }else if(mode==='preseason'){
+      box.innerHTML=`
+        <h2>Pontuação da Pré-temporada</h2>
+        <p class="muted">Desempenho dos participantes nos palpites de longo prazo da pré-temporada.</p>
       `;
     }else if(mode==='accumulated_regular'){
       const reg=Bolao.Finance.accumulatedAwards(rows,f.regularPool);
