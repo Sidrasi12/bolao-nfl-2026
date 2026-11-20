@@ -69,7 +69,8 @@ Bolao.Admin = {
         throw new Error(`Gabarito oficial (adminSettings/preseason_result_${BOLAO_CONFIG.season}) não encontrado.`);
       }
 
-      const gabarito = gabaritoSnap.data().picks || {};
+      const data = gabaritoSnap.data() || {};
+      const gabarito = data.picks || data;
       const users = await this.activeUsers();
       if (!users.length) throw new Error('Nenhum participante ativo encontrado.');
 
