@@ -124,7 +124,7 @@ Bolao.Admin = {
   async loadUsers() {
     try {
       const users = await this.activeUsers();
-      document.querySelector('#users').innerHTML = `<h2>Participantes ativos (${users.length})</h2><div class="table-wrap"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Função</th><th>Pago</th></tr></thead><tbody>${users.map(x => `<tr><td>${x.name \vert{}\vert{} ''}</td><td>${x.email || ''}</td><td>${x.role \vert{}\vert{} 'player'}</td><td>${x.paid ? 'Sim' : 'Não'}</td></tr>`).join('')}</tbody></table></div>`;
+      document.querySelector('#users').innerHTML = `<h2>Participantes ativos (${users.length})</h2><div class="table-wrap"><table><thead><tr><th>Nome</th><th>E-mail</th><th>Função</th><th>Pago</th></tr></thead><tbody>${users.map(x => `<tr><td>${x.name || ''}</td><td>${x.email || ''}</td><td>${x.role || 'player'}</td><td>${x.paid ? 'Sim' : 'Não'}</td></tr>`).join('')}</tbody></table></div>`;
     } catch (e) { document.querySelector('#users').textContent = 'Erro: ' + e.message; }
   },
 
@@ -228,3 +228,5 @@ Bolao.Admin = {
       for (const s of scores) batch.set(Bolao.db.collection('roundScores').doc(`${roundId}_${s.uid}`), { season: BOLAO_CONFIG.season, week, userId: s.uid, userName: s.name, points: s.weekPoints, winnerHits: s.winnerHits, difficultyHits: s.difficultyHits, processedAt: firebase.firestore.FieldValue.serverTimestamp() });
       await batch.commit(); status.innerHTML = `<b>Rodada ${week} apurada.</b><br>${games.length} jogos, sendo ${games.filter(g => g.manual).length} resultado(s) manual(is), para ${users.length} participantes.`; Bolao.App.toast('Apuração concluída');
     } catch (e) { status.textContent = 'Erro: ' + e.message; Bolao.App.toast('Falha na apuração'); } finally { btn.disabled = false; }
+  }
+};
