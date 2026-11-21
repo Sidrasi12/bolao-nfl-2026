@@ -11,25 +11,40 @@ Bolao.FavoriteTeamRanking = {
 
   logoHtml(userId) {
     const user = this.users.get(userId);
-    const team = Bolao.teamByAbbr(user?.favoriteTeam);
-    if (!team) return '';
+    const abbr = typeof user?.favoriteTeam === 'string' ? user.favoriteTeam.trim() : '';
+    if (!abbr) return '';
 
-    return `<img class="ranking-team-logo" src="${team.logo}"
-      alt="" title="${team.name}">`;
+    const team = Bolao.teamByAbbr?.(abbr);
+    if (!team || !team.logo) return '';
+
+    return `<img class="ranking-team-logo" src="${team.logo}" alt="${team.name || abbr}" title="${team.name || abbr}">`;
   },
 
   decorate(rows) {
-    const bodyRows = document.querySelectorAll('#ranking tbody tr');
+    const bodyRows = Array.from(document.querySelectorAll('#ranking tbody tr'));
+    let participantIndex = 0;
 
-    bodyRows.forEach((tableRow, index) => {
-      const row = rows[index];
+    bodyRows.forEach(tableRow => {
+      const isGabarito =
+        tableRow.matches('.gabarito-row, [data-is-gabarito="true"]') ||
+        /gabarito oficial/i.test(tableRow.textContent || '');
+
+      if (isGabarito) return;
+
+      const row = rows[participantIndex];
+      participantIndex += 1;
+
       const nameCell = tableRow.children[1];
-      if (!row || !nameCell || nameCell.querySelector('.ranking-team-logo')) return;
+      if (!row || !nameCell) return;
+
+      const existingLogo = nameCell.querySelector('.ranking-team-logo');
+      if (existingLogo) existingLogo.remove();
 
       const logo = this.logoHtml(row.uid);
       if (!logo) return;
 
-      nameCell.innerHTML = `<span class="ranking-participant">${logo}<span>${nameCell.innerHTML}</span></span>`;
+      const innerText = nameCell.innerHTML;
+      nameCell.innerHTML = `<span class="ranking-participant">${logo}<span>${innerText}</span></span>`;
     });
   }
 };
@@ -41,8 +56,15 @@ Bolao.Ranking.load = async function(mode) {
   await favoriteTeamPreviousRankingLoad(mode);
 
   const source = await Bolao.Ranking.source();
-  const rows = Bolao.Ranking.rows(source.users, source.scores, mode)
-    .sort((first, second) => Bolao.Finance.compare(first, second));
+  let rows;
+
+  if (mode === 'preseason' && typeof Bolao.Ranking.loadPreseasonMatrix === 'function') {
+    const matrixData = await Bolao.Ranking.loadPreseasonMatrix(source.users);
+    rows = matrixData.rows || [];
+  } else {
+    rows = Bolao.Ranking.rows(source.users, source.scores, mode)
+      .sort((first, second) => Bolao.Finance.compare(first, second));
+  }
 
   Bolao.FavoriteTeamRanking.decorate(rows);
 };
