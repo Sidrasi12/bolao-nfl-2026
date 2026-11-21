@@ -211,9 +211,9 @@ Bolao.Ranking = {
         const { gabarito, rows } = await this.loadPreseasonMatrix(data.users);
 
         const gabaritoRow = `
-          <tr style="background:rgba(255,255,255,0.06);border-bottom:2px solid rgba(255,255,255,0.15)">
+          <tr class="gabarito-row" data-is-gabarito="true" style="background:rgba(255,255,255,0.06);border-bottom:2px solid rgba(255,255,255,0.15)">
             <td>★</td>
-            <td><b>Gabarito Oficial</b></td>
+            <td><span class="gabarito-badge">📋 <b>Gabarito Oficial</b></span></td>
             <td><b>—</b></td>
             <td><b>—</b></td>
             ${this.preseasonColumns.map(col => {
